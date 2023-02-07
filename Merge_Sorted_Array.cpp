@@ -12,7 +12,7 @@ public:
             if (nums1[i]<nums2[j]) {
                 ans.push_back(nums1[i]);
                 i++;
-            } else {
+            } else {    
                 ans.push_back(nums2[j]);
                 j++;
             }
