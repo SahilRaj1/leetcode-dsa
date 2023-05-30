@@ -6,37 +6,38 @@ using namespace std;
 class Solution {
 public:
 
-    bool check(vector<int>& weights, int days, int ship) {
-        int sum=0, daysTaken=0;
-        for (auto &it: weights) {
-            if (sum+it>ship) {
-                sum = 0;
-                daysTaken++;
+    int check(vector<int>& arr, int n, int days, int mid) {
+        int days_taken = 1, sum = 0;
+        for (int i=0; i<n; i++) {
+            if (sum + arr[i] <= mid) {
+                sum += arr[i];
+            } else {
+                if (arr[i]>mid) {
+                    return false;
+                }
+                days_taken++;
+                sum = arr[i];
             }
-            sum+=it;
         }
-        int n = weights.size();
-        if (weights[n-1]==sum or sum<=ship) daysTaken++;
-        return daysTaken<=days;
+        return days_taken <= days;
     }
 
     int shipWithinDays(vector<int>& weights, int days) {
-        int maxWeight = 0;
-        maxWeight = accumulate(weights.begin(), weights.end(), maxWeight);
-        int lo=*max_element(weights.begin(), weights.end()), hi= maxWeight, mid;
-        while (hi-lo>1) {
-            mid = lo+(hi-lo)/2;
-            if (check(weights, days, mid)) {
+        int n = weights.size();
+        int lo=0, hi=accumulate(weights.begin(), weights.end(), 0), mid;
+        while (hi-lo > 1) {
+            // FFFFFFFFTTTTTTTTT
+            mid = lo + (hi-lo)/2;
+            if (check(weights, n, days, mid)) {
                 hi = mid;
             } else {
                 lo = mid+1;
             }
         }
-        if (check(weights, days, lo)) {
+        if (check(weights, n, days, lo)) {
             return lo;
-        } else {
-            return hi;
         }
+        return hi;
     }
 };
 
