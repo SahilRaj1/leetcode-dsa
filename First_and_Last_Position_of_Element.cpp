@@ -9,12 +9,12 @@ public:
         int n=nums.size();
         int lo=0, hi=n-1, mid;
 
-        // yaar mujhe yaha initialize karna chahiye tha
         vector<int> ans = {-1, -1};
 
         if (n==1 and nums[0]==target) {
             ans[0]=0;
             ans[1]=0;
+            return ans;
         }    
 
         while(hi-lo>=0) {
