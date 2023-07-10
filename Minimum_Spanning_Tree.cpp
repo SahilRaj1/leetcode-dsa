@@ -90,9 +90,9 @@ int minimumSpanningTree(vector<vector<int>>& edges, int n) {
 		int u = edges[i][0];
 		int v = edges[i][1];
 		int w = edges[i][2];
-    edges[i][0] = w;
-    edges[i][1] = u;
-    edges[i][2] = v;
+        edges[i][0] = w;
+        edges[i][1] = u;
+        edges[i][2] = v;
 	}
 
   return kruskal(edges, n);
