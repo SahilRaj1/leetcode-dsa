@@ -3,40 +3,37 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool check(vector<int> &arr, int n, int k, int mid) {
-    int cows = 1, last = arr[0];
-    for (int i=1; i<n; i++) {
-        if (arr[i] - last >= mid) {
-            cows++;
-            last = arr[i];
-            if (cows == k) {
-                return true;
-            } 
-        }
-    }
-    return false;
-}
+class Solution {
+public:
 
-int aggressiveCows(vector<int> &stalls, int k) {
-    int n = stalls.size();
-    if (k > n) {
-        return -1;
-    }
-    sort(stalls.begin(), stalls.end());
-    int lo=0, hi=*max_element(stalls.begin(), stalls.end()), mid;
-    while (hi-lo>1) {
-        mid = lo + (hi-lo)/2;
-        if (check(stalls, n, k, mid)) {
-            lo = mid;
-        } else {
-            hi = mid-1;
+    static bool check(vector<int> &stalls, int n, int cows, int mid) {
+        int placedCows = 1, lastStall = stalls[0];
+        for (int i=1; i<n; i++) {
+            if (stalls[i]-lastStall >= mid) {
+                placedCows++;
+                lastStall = stalls[i];
+            }
         }
+        return placedCows >= cows;
     }
-    if (check(stalls, n, k, hi)) {
-        return hi;
+
+    int solve(int n, int k, vector<int> &stalls) {
+        sort(stalls.begin(), stalls.end());
+        int mx = *max_element(stalls.begin(), stalls.end()), mn = *min_element(stalls.begin(), stalls.end());
+        int lo = 1, hi = mx-mn, mid, ans;
+        // T T T T T F F F F F F F F F F
+        while (lo <= hi) {
+            mid = lo + (hi-lo)/2;
+            if (check(stalls, n, k, mid)) {
+                ans = mid;
+                lo = mid + 1;
+            } else {
+                hi = mid - 1;
+            }
+        }
+        return ans;
     }
-    return lo;
-}
+};
 
 int main() {
 
