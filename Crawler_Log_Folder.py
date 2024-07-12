@@ -1,5 +1,5 @@
 class Solution:
-    def minOperations(self, logs: List[str]) -> int:
+    def minOperations(self, logs: List[str]) -> int: # type: ignore
         ans = 0
         for log in logs:
             if len(log) == 3 and log[0] == '.':
