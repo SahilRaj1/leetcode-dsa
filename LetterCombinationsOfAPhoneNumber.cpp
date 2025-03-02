@@ -11,7 +11,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Solution {
+class Solution {Merge Two 2D Arrays by Summing Values
 public:
 
     map<char, string> hsh = {
