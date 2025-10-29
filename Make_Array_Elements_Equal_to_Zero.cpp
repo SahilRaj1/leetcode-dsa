@@ -41,7 +41,7 @@ public:
         }
         return ans;
     }
-};
+};Smallest Number With All Set Bits
 
 int main() {
 
